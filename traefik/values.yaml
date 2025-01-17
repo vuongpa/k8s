@@ -8,6 +8,11 @@ globalArguments:
 additionalArguments:
   - "--api.insecure=false"
   - "--api.dashboard=true"
+  - "--log.level=DEBUG"
+  - "--accesslog=true"
+  - "--accesslog.fields.names.StartUTC=drop"
+  - "--entrypoints.web.address=:80"
+  - "--entrypoints.websecure.address=:443"
 
 ingressRoute:
   dashboard:
