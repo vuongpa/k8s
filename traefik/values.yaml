@@ -1,0 +1,53 @@
+deployment:
+  replicas: 3
+
+globalArguments:
+  - "--global.checknewversion=true"
+  - "--global.sendanonymoususage=false"
+
+additionalArguments:
+  - "--api.insecure=false"
+  - "--api.dashboard=true"
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    annotations: {}
+
+dashboard:
+  enabled: true
+  domain: "traefik.cat.pro.vn"
+
+ports:
+  web:
+    expose: true
+    exposedPort: 80
+    protocol: TCP
+  websecure:
+    expose: true
+    exposedPort: 443
+    protocol: TCP
+    tls:
+      enabled: true
+  traefik:
+    expose: true
+    exposedPort: 9000
+    protocol: TCP
+
+service:
+  enabled: true
+  type: LoadBalancer
+
+persistence:
+  enabled: false
+
+securityContext:
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+  runAsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+
+podSecurityContext:
+  fsGroup: 65532
